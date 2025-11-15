@@ -106,7 +106,7 @@ export async function createTeam(req, res) {
     if (createdTeam) {
       let userPayload = {
         username,
-        name: element,
+        name: teamData.users[0],
         email: teamData.email,
         password,
         enabled: true,
