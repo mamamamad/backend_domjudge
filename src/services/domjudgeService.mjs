@@ -119,7 +119,6 @@ export class DomjudgeService {
         logger.warn(`Team might already exist: ${teamData.name}`);
         return;
       }
-      throw error;
     }
   }
 
