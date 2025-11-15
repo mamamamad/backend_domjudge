@@ -65,7 +65,7 @@ export async function createTeam(req, res) {
       ...existingTeams.values(),
       ...existingUsers.values(),
     ]);
-    console.log("hi1");
+
     const existingUsernames = new Set(existingUsers.keys());
 
     // Generate unique ID
@@ -104,6 +104,7 @@ export async function createTeam(req, res) {
     let createData = {};
 
     const createdTeam = await domjudgeService.createTeam(teamPayload);
+    console.log("hi2");
     console.log(createdTeam);
     console.log("hi");
 
