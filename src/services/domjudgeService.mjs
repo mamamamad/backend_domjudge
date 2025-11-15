@@ -110,7 +110,7 @@ export class DomjudgeService {
   async createTeam(teamData) {
     try {
       const response = await this.api.post(`/api/v4/teams`, teamData);
-      console.log(response)
+      console.log(response);
       logger.info(`Created team: ${teamData.name} with ID ${teamData.id}`);
       return response.data;
     } catch (error) {
