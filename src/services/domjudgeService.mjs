@@ -113,7 +113,9 @@ export class DomjudgeService {
       console.log(teamData);
 
       const response = await this.api.post(`/api/v4/teams`, teamData);
+      console.log("hi21");
       console.log(response, "hi22");
+      console.log("hi22");
 
       logger.info(`Created team: ${teamData.name} with ID ${teamData.id}`);
       return response.data;
