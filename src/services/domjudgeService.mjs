@@ -115,8 +115,9 @@ export class DomjudgeService {
         return response.data;
       }
     } catch (error) {
-      if (error.response?.status === 400) {
+      if (error.response.status === 400) {
         logger.warn(`Team might already exist: ${teamData.name}`);
+        return;
       }
       throw error;
     }
