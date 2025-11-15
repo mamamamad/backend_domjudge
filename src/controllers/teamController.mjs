@@ -88,7 +88,7 @@ export async function createTeam(req, res) {
     const password = generatePassword(10);
 
     // Create team
-
+    console.log()
     const teamPayload = {
       icpc_id: uniqueId, // must be unique
       id: uniqueId, // remove this, server will assign
@@ -103,10 +103,9 @@ export async function createTeam(req, res) {
       group_ids: ["3"],
     };
     let createData = {};
-    console.log("hi4");
 
     const createdTeam = await domjudgeService.createTeam(teamPayload);
-    console.log(createTeam);
+
     if (createdTeam) {
       for (const element of teamData.users) {
         const userPayload = {

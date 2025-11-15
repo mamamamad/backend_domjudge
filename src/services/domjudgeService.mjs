@@ -109,18 +109,13 @@ export class DomjudgeService {
    */
   async createTeam(teamData) {
     try {
-      console.log(this.api.defaults.headers);
       console.log(teamData);
 
       const response = await this.api.post(`/api/v4/teams`, teamData);
-      console.log("hi21");
-      console.log(response, "hi22");
-      console.log("hi22");
 
       logger.info(`Created team: ${teamData.name} with ID ${teamData.id}`);
       return response.data;
     } catch (error) {
-      console.log(error);
       if (error.response?.status === 400) {
         logger.warn(`Team might already exist: ${teamData.name}`);
       }
