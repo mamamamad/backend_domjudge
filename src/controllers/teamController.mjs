@@ -93,6 +93,7 @@ export async function createTeam(req, res) {
       group_ids: ["3"],
     };
     let createData = {};
+    console.log("hi");
     const createdTeam = await domjudgeService.createTeam(teamPayload);
     console.log(createTeam);
     if (createdTeam) {
