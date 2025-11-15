@@ -97,8 +97,8 @@ export async function createTeam(req, res) {
       description: teamData.descriptions?.trim() || "",
       label: teamData.teamname?.trim() || "",
       public_description: teamData.teamname?.trim() || "",
-      location: null,
-      members: null,
+      location: "null",
+      members: "null",
       group_ids: ["3"],
     };
     let createData = {};
