@@ -112,7 +112,7 @@ export class DomjudgeService {
       const response = await this.api.post(`/api/v4/teams`, teamData);
       if (response.status === 201) {
         logger.info(`Created team: ${teamData.name} with ID ${teamData.id}`);
-        return response.data;
+        return response;
       }
       return response.data;
     } catch (error) {
