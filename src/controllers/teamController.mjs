@@ -106,7 +106,7 @@ export async function createTeam(req, res) {
     const createdTeam = await domjudgeService.createTeam(teamPayload);
 
     if (createdTeam === true) {
-      const userPayload = {
+      let userPayload = {
         username,
         name: element,
         email: teamData.email,
