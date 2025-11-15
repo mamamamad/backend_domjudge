@@ -34,11 +34,7 @@ export async function createTeam(req, res) {
     */
     // Validate required fields
 
-    if (
-      !teamData.teamname ||
-      !teamData.organization_id ||
-      !config.organization.includes(teamData.organization_id)
-    ) {
+    if (!teamData.teamname || !teamData.organization_id) {
       res.status(400).json({
         success: false,
         error:
