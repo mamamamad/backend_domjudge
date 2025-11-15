@@ -142,12 +142,11 @@ export async function createTeam(req, res) {
       username,
       password,
     });
-  } catch (error) {
-    console.log("hiasdada")
-    logger.error("Error creating team", { error, teamData: req.body });
+  } catch (erro) {
+    logger.error("Error creating team", { erro, teamData: req.body });
     res.status(500).json({
       success: false,
-      error: error.message || "Failed to create team",
+      error: erro.message || "Failed to create team",
     });
   }
 }
