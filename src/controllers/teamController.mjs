@@ -95,7 +95,7 @@ export async function createTeam(req, res) {
       display_name: teamData.display_name,
       description: teamData.descriptions,
       organization_id: teamData.organization_id,
-      group_ids: ["3"],
+      group_ids: 3,
     };
     let createData = {};
     const createdTeam = await domjudgeService.createTeam(teamPayload);

@@ -47,7 +47,7 @@ export class DomjudgeService {
   async getOrganizations() {
     try {
       const response = await this.api.get(
-        `/api/v4/contests/${this.contestId}/organizations`
+        `/api/v4/organizations`
       );
       const orgMap = new Map();
       response.data.forEach((org) => {
@@ -75,7 +75,7 @@ export class DomjudgeService {
   async createOrganization(orgData) {
     try {
       const response = await this.api.post(
-        `/api/v4/contests/${this.contestId}/organizations`,
+        `/api/v4/organizations`,
         orgData
       );
       logger.info(`Created organization: ${orgData.name}`);
@@ -95,7 +95,7 @@ export class DomjudgeService {
   async getTeams() {
     try {
       const response = await this.api.get(
-        `/api/v4/contests/${this.contestId}/teams`
+        `/api/v4/teams`
       );
       const teamMap = new Map();
       response.data.forEach((team) => {
@@ -117,7 +117,7 @@ export class DomjudgeService {
   async createTeam(teamData) {
     try {
       const response = await this.api.post(
-        `/api/v4/contests/${this.contestId}/teams`,
+        `/api/v4/teams`,
         teamData
       );
       logger.info(`Created team: ${teamData.name} with ID ${teamData.id}`);
