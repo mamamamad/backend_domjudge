@@ -143,6 +143,7 @@ export async function createTeam(req, res) {
       password,
     });
   } catch (error) {
+    console.log("hiasdada")
     logger.error("Error creating team", { error, teamData: req.body });
     res.status(500).json({
       success: false,
