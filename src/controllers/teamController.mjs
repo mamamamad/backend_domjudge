@@ -42,19 +42,16 @@ export async function createTeam(req, res) {
       });
       return;
     }
-    console.log("hi");
+
     // Fetch existing data
     const [existingOrgs, existingTeams, existingUsers] = await Promise.all([
       domjudgeService.getOrganizations(),
       domjudgeService.getTeams(),
       domjudgeService.getUsers(),
     ]);
-    console.log("hoy");
 
     // Check if team already exists
     if (existingTeams.has(teamData.teamname)) {
-      console.log("hi42");
-
       res.status(409).json({
         success: false,
         error: `Team '${teamData.teamname}' already exists`,
@@ -79,7 +76,7 @@ export async function createTeam(req, res) {
       teamData.organization_id,
       existingOrgs
     );
-    console.log("hi2");
+
     // Generate or use provided username
     let username = teamData.username;
     if (!username) {
@@ -89,7 +86,7 @@ export async function createTeam(req, res) {
 
     // Generate or use provided password
     const password = generatePassword(10);
-    console.log("hi3");
+
     // Create team
 
     const teamPayload = {
