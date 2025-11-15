@@ -37,7 +37,8 @@
     "js-yaml": "^4.1.0",
     "mailersend": "^2.6.0",
     "swagger-ui-express": "^5.0.0",
-    "winston": "^3.11.0"
+    "winston": "^3.11.0",
+    "nodemailer": "^7.0.10"
   },
   "devDependencies": {
     "eslint": "^8.56.0"
