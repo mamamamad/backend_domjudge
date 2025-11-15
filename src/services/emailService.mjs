@@ -14,23 +14,21 @@ export default async function SendEmail(data) {
   });
   if (data.success) {
     const BODY_TEMPLATE = ({ username, password }) => `
-سلام بچه‌ها،
+Your login information is as follows:
 
-اطلاعات ورود شما به شرح زیر است:
+Username: ${username}
+Password: ${password}
 
-یوزرنیم: ${username}
-پسورد: ${password}
-
-برای شرکت در مسابقه، به آدرس زیر مراجعه کنید:
+To participate in the contest, please visit:
 https://bircpc.ir/
 
-اگر مشکلی در ورود به سایت داشتید یا سوالی برایتان پیش آمد، از طریق ایمیل یا گروه تلگرام ما را مطلع کنید.
+If you experience any issues logging in or have any questions, feel free to contact us via Telegram group.
 
-همچنین می‌تونید اخبار و اطلاعات بیشتر در مورد مسابقه‌مون رو توی وبلاگ دنبال کنید:
+You can also follow our blog for more news and updates about the contest:
 https://blog.bircpc.ir/
 
-با آرزوی موفقیت،
-انجمن علمی کامپیوتر دانشگاه بیرجند
+Wishing you the best of luck,
+Birjand University Computer Science Student Association.
 `;
 
     await transporter.sendMail({
