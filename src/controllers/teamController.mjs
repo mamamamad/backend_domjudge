@@ -117,6 +117,7 @@ export async function createTeam(req, res) {
         roles: ["team"],
       };
       const createdUser = await domjudgeService.createUser(userPayload);
+      console.log("hi1234");
       createData = {
         success: true,
         email: teamData.email,
