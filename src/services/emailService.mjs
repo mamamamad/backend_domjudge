@@ -2,7 +2,7 @@ import "dotenv/config";
 import { config } from "../config/index.mjs";
 import nodemailer from "nodemailer";
 
-export async function SendEmail(data) {
+export default async function SendEmail(data) {
   const transporter = nodemailer.createTransport({
     host: "smtp.gmail.com",
     port: 587,

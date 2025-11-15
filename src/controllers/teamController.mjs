@@ -73,6 +73,11 @@ export async function createTeam(req, res) {
     // Generate unique ID
     const uniqueId = generateUniqueId(existingIds);
 
+    // Create or get organization
+    await domjudgeService.createOrGetOrganization(
+      teamData.organization_id,
+      existingOrgs
+    );
     // Generate or use provided username
     let username = teamData.username;
     if (!username) {
