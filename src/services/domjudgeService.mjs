@@ -170,7 +170,6 @@ export class DomjudgeService {
     }
 
     const orgData = {
-      id: uniName,
       shortname: "IR",
       name: uniName,
       formal_name: "Islamic Republic of Iran",
