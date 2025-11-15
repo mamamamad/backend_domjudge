@@ -103,6 +103,9 @@ export async function createTeam(req, res) {
     };
     let createData = {};
     console.log("hi4");
+
+    const teams = await domjudgeService.getTeams();
+    console.log(teams);
     const createdTeam = await domjudgeService.createTeam(teamPayload);
     console.log(createTeam);
     if (createdTeam) {
