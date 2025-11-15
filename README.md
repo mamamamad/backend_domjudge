@@ -83,6 +83,22 @@ http://localhost:3000/api-docs
 }
 ```
 
+## ✅ Curl test onlocal
+
+````bash
+curl -X POST http://localhost:port/api/v1/teams \
+-H "Content-Type: application/json" \
+-d '{
+"teamname": "Codekesha2",
+"display_name": "Codekesha2",
+"descriptions": "xxeeqweqwewqx",
+"organization_id": "ueeqwqweni",
+"email": "xxx@gmail.com",
+"phoneNumber": "011eqwe23232",
+"users": ["mamadhasan", "hasan", "karim"]
+}'
+```
+
 4. Click **"Execute"**
 5. View the response with team ID, username, and password
 
@@ -150,7 +166,7 @@ curl -X POST http://localhost:3000/api/v1/test \
 
 # Test Health
 curl http://localhost:3000/health
-```
+````
 
 ## 💡 Tips
 
