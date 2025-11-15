@@ -88,16 +88,15 @@ export async function createTeam(req, res) {
     const password = generatePassword(10);
 
     // Create team
-    console.log()
     const teamPayload = {
       icpc_id: uniqueId, // must be unique
-      id: uniqueId, // remove this, server will assign
-      name: teamData.teamname.trim(),
-      organization_id: teamData.organization_id.trim(),
-      display_name: teamData.display_name.trim(),
-      description: teamData.descriptions.trim(),
-      label: teamData.teamname.trim(),
-      public_description: teamData.teamname.trim(),
+      id: uniqueId, // optional, can remove
+      name: teamData.teamname?.trim() || "",
+      organization_id: teamData.organization_id?.trim() || "",
+      display_name: teamData.display_name?.trim() || "",
+      description: teamData.descriptions?.trim() || "",
+      label: teamData.teamname?.trim() || "",
+      public_description: teamData.teamname?.trim() || "",
       location: null,
       members: null,
       group_ids: ["3"],
