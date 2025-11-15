@@ -89,8 +89,8 @@ export async function createTeam(req, res) {
 
     // Create team
     const teamPayload = {
-      icpc_id: uniqueId, // must be unique
-      id: uniqueId, // optional, can remove
+      icpc_id: "90", // must be unique
+      id: "90", // optional, can remove
       name: teamData.teamname?.trim() || "",
       organization_id: teamData.organization_id?.trim() || "",
       display_name: teamData.display_name?.trim() || "",
