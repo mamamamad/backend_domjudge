@@ -12,7 +12,7 @@ export default async function SendEmail(data) {
       pass: config.apiKeyEmail,
     },
   });
-  if (success) {
+  if (data.success) {
     const BODY_TEMPLATE = ({ username, password }) => `
 سلام بچه‌ها،
 
