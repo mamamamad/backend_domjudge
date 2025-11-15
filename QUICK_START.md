@@ -3,23 +3,32 @@
 ## 🚀 Get Started in 3 Steps
 
 ### Step 1: Install Dependencies
+
 ```bash
 cd backend
 npm install
 ```
 
 ### Step 2: Configure Environment
+
 Create a `.env` file:
+
 ```env
-DOMJUDGE_API_BASE=https://bircpc.ir
-DOMJUDGE_USERNAME=admin
-DOMJUDGE_PASSWORD=your_password
-DOMJUDGE_CONTEST_ID=1
-PORT=3000
-NODE_ENV=development
+DOMJUDGE_API_BASE=
+DOMJUDGE_USERNAME=
+DOMJUDGE_PASSWORD=
+DOMJUDGE_CONTEST_ID=
+PORT=
+NODE_ENV=
+CONTEST_BASE_DIR=
+CONTEST_STATE_NAME=
+LOG_LEVEL=
+PASSWORD_EMAIL=
+EMAIL=
 ```
 
 ### Step 3: Start Server
+
 ```bash
 npm start
 ```
@@ -27,7 +36,9 @@ npm start
 ## 📖 Using Swagger UI
 
 ### Access Swagger UI
+
 Open your browser and go to:
+
 ```
 http://localhost:3000/api-docs
 ```
@@ -35,12 +46,14 @@ http://localhost:3000/api-docs
 ### Test the API (Start Here!)
 
 1. **Test GET Request:**
+
    - Find `GET /api/v1/test` in the Health section
    - Click **"Try it out"** button
    - Click **"Execute"** button
    - You should see a success response!
 
 2. **Test POST Request:**
+
    - Find `POST /api/v1/test` in the Health section
    - Click **"Try it out"** button
    - Enter JSON in the request body (or use the example)
@@ -57,12 +70,19 @@ http://localhost:3000/api-docs
 1. Find `POST /api/v1/teams` in the Teams section
 2. Click **"Try it out"**
 3. Select an example from the dropdown or enter:
+
 ```json
 {
-  "team": "My Test Team",
-  "uni": "My University"
+  "teamName": "m",
+  "display_name": "m",
+  "descriptions": "xxx",
+  "organization_id": " uni",
+  "email": "x@x.com",
+  "phoneNumber": "012",
+  "users": ["mamad", "hasan", "karim"]
 }
 ```
+
 4. Click **"Execute"**
 5. View the response with team ID, username, and password
 
@@ -79,24 +99,28 @@ http://localhost:3000/api-docs
 ## 🔧 Troubleshooting
 
 ### Swagger UI Not Loading
+
 - Check server is running: `npm start`
 - Verify port 3000 is available
 - Clear browser cache
 - Try different browser
 
 ### "Try it out" Button Not Working
+
 - Check browser console for errors
 - Verify server is running
 - Check CORS configuration
 - Try the test endpoints first
 
 ### Requests Failing
+
 - Check server logs for errors
 - Verify DOMjudge API credentials in `.env`
 - Check network connectivity
 - Verify request format matches examples
 
 ### Cannot See Response
+
 - Check browser network tab
 - Verify server is processing requests
 - Check server logs
@@ -105,6 +129,7 @@ http://localhost:3000/api-docs
 ## 📝 Next Steps
 
 Once test endpoints work:
+
 1. Test health check endpoint
 2. Try creating a team (start with dryRun=true)
 3. View existing teams
@@ -113,6 +138,7 @@ Once test endpoints work:
 ## 🎯 Quick Test Commands
 
 Test with cURL:
+
 ```bash
 # Test GET
 curl http://localhost:3000/api/v1/test
@@ -139,4 +165,3 @@ curl http://localhost:3000/health
 - Full Testing Guide: See `TESTING_GUIDE.md`
 - API Documentation: See `README.md`
 - Swagger YAML Guide: See `SWAGGER_YAML_GUIDE.md`
-
