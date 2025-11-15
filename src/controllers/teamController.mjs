@@ -18,7 +18,6 @@ import sendEmail from "../services/emailService.mjs";
 export async function createTeam(req, res) {
   try {
     const teamData = req.body;
-    console.log(teamData);
 
     /*
     teamData= {
@@ -104,8 +103,8 @@ export async function createTeam(req, res) {
     let createData = {};
 
     const createdTeam = await domjudgeService.createTeam(teamPayload);
-
-    if (createdTeam === true) {
+    console.log(typeof createdTeam);
+    if (createdTeam) {
       let userPayload = {
         username,
         name: element,
