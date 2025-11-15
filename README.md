@@ -85,7 +85,7 @@ http://localhost:3000/api-docs
 
 ## ✅ Curl test onlocal
 
-````bash
+```bash
 curl -X POST http://localhost:port/api/v1/teams \
 -H "Content-Type: application/json" \
 -d '{
@@ -166,7 +166,7 @@ curl -X POST http://localhost:3000/api/v1/test \
 
 # Test Health
 curl http://localhost:3000/health
-````
+```
 
 ## 💡 Tips
 
