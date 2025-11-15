@@ -42,14 +42,14 @@ export async function createTeam(req, res) {
       });
       return;
     }
-
+    console.log("hi");
     // Fetch existing data
     const [existingOrgs, existingTeams, existingUsers] = await Promise.all([
       domjudgeService.getOrganizations(),
       domjudgeService.getTeams(),
       domjudgeService.getUsers(),
     ]);
-
+    console.log("hoy");
     // Check if team already exists
     if (existingTeams.has(teamData.teamname)) {
       res.status(409).json({
@@ -64,6 +64,7 @@ export async function createTeam(req, res) {
       ...existingTeams.values(),
       ...existingUsers.values(),
     ]);
+    console.log("hi1");
     const existingUsernames = new Set(existingUsers.keys());
 
     // Generate unique ID
@@ -74,6 +75,7 @@ export async function createTeam(req, res) {
       teamData.organization_id,
       existingOrgs
     );
+    console.log("hi2");
     // Generate or use provided username
     let username = teamData.username;
     if (!username) {
@@ -83,7 +85,7 @@ export async function createTeam(req, res) {
 
     // Generate or use provided password
     const password = generatePassword(10);
-
+    console.log("hi3");
     // Create team
     const teamPayload = {
       name: teamData.teamname,
@@ -93,7 +95,7 @@ export async function createTeam(req, res) {
       group_ids: ["3"],
     };
     let createData = {};
-    console.log("hi");
+    console.log("hi4");
     const createdTeam = await domjudgeService.createTeam(teamPayload);
     console.log(createTeam);
     if (createdTeam) {
