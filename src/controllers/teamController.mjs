@@ -87,11 +87,18 @@ export async function createTeam(req, res) {
     const password = generatePassword(10);
     console.log("hi3");
     // Create team
+
     const teamPayload = {
+      id: uniqueId,
+      icpc_id: uniqueId,
       name: teamData.teamname,
+      public_description: teamData.teamname,
       display_name: teamData.display_name,
       description: teamData.descriptions,
       organization_id: teamData.organization_id,
+      label: teamData.teamname,
+      location: null,
+      members: null,
       group_ids: ["3"],
     };
     let createData = {};
