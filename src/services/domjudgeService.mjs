@@ -120,6 +120,7 @@ export class DomjudgeService {
       logger.info(`Created team: ${teamData.name} with ID ${teamData.id}`);
       return response.data;
     } catch (error) {
+      console.log(error);
       if (error.response?.status === 400) {
         logger.warn(`Team might already exist: ${teamData.name}`);
       }
