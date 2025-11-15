@@ -86,7 +86,6 @@ export async function createTeam(req, res) {
 
     // Create team
     const teamPayload = {
-      id: uniqueId,
       name: teamData.teamname,
       display_name: teamData.display_name,
       description: teamData.descriptions,
