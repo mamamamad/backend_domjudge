@@ -105,30 +105,27 @@ export async function createTeam(req, res) {
 
     const createdTeam = await domjudgeService.createTeam(teamPayload);
     if (createdTeam) {
-      for (const element of teamData.users) {
-        console.log(element);
-        const userPayload = {
-          id: `${uniqueId}`,
-          username,
-          name: element,
-          email: teamData.email,
-          password,
-          enabled: true,
-          team_id: `${uniqueId}`,
-          roles: ["team"],
-        };
-        const createdUser = await domjudgeService.createUser(userPayload);
-        createData = {
-          success: true,
-          email: teamData.email,
-          teamId: createdTeam.id,
-          userId: createdUser.id,
-          username,
-          password,
-        };
+      const userPayload = {
+        id: `${uniqueId}`,
+        username,
+        name: element,
+        email: teamData.email,
+        password,
+        enabled: true,
+        team_id: `${uniqueId}`,
+        roles: ["team"],
+      };
+      const createdUser = await domjudgeService.createUser(userPayload);
+      createData = {
+        success: true,
+        email: teamData.email,
+        teamId: createdTeam.id,
+        userId: createdUser.id,
+        username,
+        password,
+      };
 
-        console.log(createData);
-      }
+      console.log(createData);
     }
     const sendEmailStatus = sendEmail(createData);
     console.log(
