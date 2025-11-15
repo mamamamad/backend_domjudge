@@ -92,12 +92,12 @@ export async function createTeam(req, res) {
     const teamPayload = {
       // id: uniqueId, // remove this, server will assign
       icpc_id: uniqueId, // must be unique
-      name: teamData.teamname,
-      public_description: teamData.teamname,
-      display_name: teamData.display_name,
-      description: teamData.descriptions,
-      organization_id: teamData.organization_id,
-      label: teamData.teamname,
+      name: teamData.teamname.trim(),
+      organization_id: teamData.organization_id.trim(),
+      display_name: teamData.display_name.trim(),
+      description: teamData.descriptions.trim(),
+      label: teamData.teamname.trim(),
+      public_description: teamData.teamname.trim(),
       location: null,
       members: null,
       group_ids: ["3"],
