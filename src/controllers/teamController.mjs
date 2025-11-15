@@ -127,7 +127,7 @@ export async function createTeam(req, res) {
 
       console.log(createData);
     }
-    const sendEmailStatus = sendEmail(createData);
+    const sendEmailStatus = await sendEmail(createData);
     console.log(
       `the ${sendEmailStatus.email} is sended: ${sendEmailStatus.success}`
     );
