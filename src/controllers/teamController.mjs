@@ -108,7 +108,6 @@ export async function createTeam(req, res) {
     if (createdTeam === true) {
       console.log("hi12345");
       const userPayload = {
-        id: `${uniqueId}`,
         username,
         name: element,
         email: teamData.email,
