@@ -43,7 +43,9 @@ https://blog.bircpc.ir/
         password: data.password,
       })}</pre>`,
     });
-    return { success: true, email: data.email };
+    let result = { success: true, email: data.email };
+    return result;
   }
-  return { success: false, email: data.email };
+  let result = { success: false, email: data.email };
+  return result;
 }

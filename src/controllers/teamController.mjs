@@ -92,7 +92,7 @@ export async function createTeam(req, res) {
       id: `${uniqueId}`, // optional, can remove
       name: teamData.teamname?.trim() || "",
       organization_id: teamData.organization_id?.trim() || "",
-      display_name: teamData.display_name?.trim() || "",
+      display_name: teamData.teamname?.trim() || "" || "",
       description: teamData.descriptions?.trim() || "",
       label: teamData.teamname?.trim() || "",
       public_description: teamData.teamname?.trim() || "",
@@ -131,6 +131,8 @@ export async function createTeam(req, res) {
     console.log(
       `the ${sendEmailStatus.email} is sended: ${sendEmailStatus.success}`
     );
+    console.log(sendEmailStatus);
+
     addDataToJson("registerUser.json", teamData);
     addDataToJson("userPass.json", createData);
     addDataToJson("sendemail.json", sendEmailStatus);
