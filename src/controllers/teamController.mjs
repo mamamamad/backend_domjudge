@@ -103,30 +103,30 @@ export async function createTeam(req, res) {
     let createData = {};
 
     const createdTeam = await domjudgeService.createTeam(teamPayload);
+    if (createdTeam) {
+      let userPayload = {
+        username,
+        name: element,
+        email: teamData.email,
+        password,
+        enabled: true,
+        team_id: uniqueId,
+        roles: ["team"],
+      };
+      console.log(userPayload);
+      const createdUser = await domjudgeService.createUser(userPayload);
+      console.log(createdUser);
+      createData = {
+        success: true,
+        email: teamData.email,
+        teamId: createdTeam.id,
+        userId: createdUser.id,
+        username,
+        password,
+      };
 
-    let userPayload = {
-      username,
-      name: element,
-      email: teamData.email,
-      password,
-      enabled: true,
-      team_id: uniqueId,
-      roles: ["team"],
-    };
-    console.log(userPayload);
-    const createdUser = await domjudgeService.createUser(userPayload);
-    console.log(createdUser);
-    createData = {
-      success: true,
-      email: teamData.email,
-      teamId: createdTeam.id,
-      userId: createdUser.id,
-      username,
-      password,
-    };
-
-    console.log(createData);
-
+      console.log(createData);
+    }
     const sendEmailStatus = sendEmail(createData);
     console.log(
       `the ${sendEmailStatus.email} is sended: ${sendEmailStatus.success}`
@@ -146,7 +146,7 @@ export async function createTeam(req, res) {
     logger.error("Error creating team", { error, teamData: req.body });
     res.status(500).json({
       success: false,
-      error: error || "Failed to create team",
+      error: error.message || "Failed to create team",
     });
   }
 }
