@@ -90,7 +90,6 @@ curl -X POST http://localhost:port/api/v1/teams \
 -H "Content-Type: application/json" \
 -d '{
 "teamname": "Codekesha2",
-"display_name": "Codekesha2",
 "descriptions": "xxeeqweqwewqx",
 "organization_id": "ueeqwqweni",
 "email": "xxx@gmail.com",
