@@ -110,7 +110,7 @@ export async function createTeam(req, res) {
         email: teamData.email,
         password,
         enabled: true,
-        team_id: uniqueId,
+        team_id: `${uniqueId}`,
         roles: ["team"],
       };
       console.log(userPayload);
