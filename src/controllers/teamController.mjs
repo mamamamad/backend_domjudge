@@ -105,6 +105,7 @@ export async function createTeam(req, res) {
 
     const createdTeam = await domjudgeService.createTeam(teamPayload);
     console.log(createdTeam);
+    console.log("hi1234");
     if (createdTeam) {
       const userPayload = {
         id: `${uniqueId}`,
