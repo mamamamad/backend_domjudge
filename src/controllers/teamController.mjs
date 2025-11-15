@@ -146,7 +146,7 @@ export async function createTeam(req, res) {
     logger.error("Error creating team", { error, teamData: req.body });
     res.status(500).json({
       success: false,
-      error: error.message || "Failed to create team",
+      error: error || "Failed to create team",
     });
   }
 }
