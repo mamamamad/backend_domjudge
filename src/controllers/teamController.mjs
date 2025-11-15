@@ -50,12 +50,16 @@ export async function createTeam(req, res) {
       domjudgeService.getUsers(),
     ]);
     console.log("hoy");
+
     // Check if team already exists
     if (existingTeams.has(teamData.teamname)) {
+      console.log("hi42");
+
       res.status(409).json({
         success: false,
         error: `Team '${teamData.teamname}' already exists`,
       });
+
       return;
     }
 
@@ -104,8 +108,6 @@ export async function createTeam(req, res) {
     let createData = {};
     console.log("hi4");
 
-    const teams = await domjudgeService.getTeams();
-    console.log(teams);
     const createdTeam = await domjudgeService.createTeam(teamPayload);
     console.log(createTeam);
     if (createdTeam) {
