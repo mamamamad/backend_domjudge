@@ -111,8 +111,10 @@ export class DomjudgeService {
     try {
       console.log("fuxjjjjjjjjjj");
       console.log(this.api.defaults.headers);
+      console.log(teamData);
+
       const response = await this.api.post(`/api/v4/teams`, teamData);
-      
+
       logger.info(`Created team: ${teamData.name} with ID ${teamData.id}`);
       return response.data;
     } catch (error) {
