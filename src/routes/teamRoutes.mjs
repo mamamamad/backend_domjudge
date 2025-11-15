@@ -1,12 +1,6 @@
 import { Router } from "express";
 import { body } from "express-validator";
-import {
-  createTeam,
-  createTeamsBulk,
-  getTeams,
-  getOrganizations,
-  getUsers,
-} from "../controllers/teamController.mjs";
+import { createTeam } from "../controllers/teamController.mjs";
 import { validateRequest } from "../middleware/validation.mjs";
 
 const router = Router();
