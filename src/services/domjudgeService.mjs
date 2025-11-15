@@ -1,6 +1,6 @@
-import axios from 'axios';
-import { config } from '../config/index.mjs';
-import logger from '../utils/logger.mjs';
+import axios from "axios";
+import { config } from "../config/index.mjs";
+import logger from "../utils/logger.mjs";
 
 export class DomjudgeService {
   constructor() {
@@ -14,7 +14,7 @@ export class DomjudgeService {
         password: config.domjudge.password,
       },
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
     });
 
@@ -23,14 +23,14 @@ export class DomjudgeService {
       (response) => response,
       (error) => {
         if (error.response) {
-          logger.error('DOMjudge API Error', {
+          logger.error("DOMjudge API Error", {
             status: error.response.status,
             statusText: error.response.statusText,
             data: error.response.data,
             url: error.config?.url,
           });
         } else if (error.request) {
-          logger.error('DOMjudge API Request Error', {
+          logger.error("DOMjudge API Request Error", {
             message: error.message,
             url: error.config?.url,
           });
@@ -46,9 +46,7 @@ export class DomjudgeService {
    */
   async getOrganizations() {
     try {
-      const response = await this.api.get(
-        `/api/v4/organizations`
-      );
+      const response = await this.api.get(`/api/v4/organizations`);
       const orgMap = new Map();
       response.data.forEach((org) => {
         // Organization ID can be string or number
@@ -57,8 +55,8 @@ export class DomjudgeService {
       logger.info(`Fetched ${orgMap.size} organizations`);
       return orgMap;
     } catch (error) {
-      logger.error('Failed to fetch organizations', { error });
-      throw new Error('Failed to fetch organizations from DOMjudge');
+      logger.error("Failed to fetch organizations", { error });
+      throw new Error("Failed to fetch organizations from DOMjudge");
     }
   }
 
@@ -74,10 +72,7 @@ export class DomjudgeService {
    */
   async createOrganization(orgData) {
     try {
-      const response = await this.api.post(
-        `/api/v4/organizations`,
-        orgData
-      );
+      const response = await this.api.post(`/api/v4/organizations`, orgData);
       logger.info(`Created organization: ${orgData.name}`);
       return response.data;
     } catch (error) {
@@ -94,9 +89,7 @@ export class DomjudgeService {
    */
   async getTeams() {
     try {
-      const response = await this.api.get(
-        `/api/v4/teams`
-      );
+      const response = await this.api.get(`/api/v4/teams`);
       const teamMap = new Map();
       response.data.forEach((team) => {
         teamMap.set(team.name, team.id);
@@ -104,8 +97,8 @@ export class DomjudgeService {
       logger.info(`Fetched ${teamMap.size} teams`);
       return teamMap;
     } catch (error) {
-      logger.error('Failed to fetch teams', { error });
-      throw new Error('Failed to fetch teams from DOMjudge');
+      logger.error("Failed to fetch teams", { error });
+      throw new Error("Failed to fetch teams from DOMjudge");
     }
   }
 
@@ -116,10 +109,7 @@ export class DomjudgeService {
    */
   async createTeam(teamData) {
     try {
-      const response = await this.api.post(
-        `/api/v4/teams`,
-        teamData
-      );
+      const response = await this.api.post(`/api/v4/teams`, teamData);
       logger.info(`Created team: ${teamData.name} with ID ${teamData.id}`);
       return response.data;
     } catch (error) {
@@ -144,8 +134,8 @@ export class DomjudgeService {
       logger.info(`Fetched ${userMap.size} users`);
       return userMap;
     } catch (error) {
-      logger.error('Failed to fetch users', { error });
-      throw new Error('Failed to fetch users from DOMjudge');
+      logger.error("Failed to fetch users", { error });
+      throw new Error("Failed to fetch users from DOMjudge");
     }
   }
 
@@ -181,10 +171,10 @@ export class DomjudgeService {
 
     const orgData = {
       id: uniName,
-      shortname: uniName,
+      shortname: "IR",
       name: uniName,
-      formal_name: uniName,
-      country: 'IRN',
+      formal_name: "Islamic Republic of Iran",
+      country: "IRN",
     };
 
     try {
@@ -210,4 +200,3 @@ export class DomjudgeService {
 }
 
 export default new DomjudgeService();
-
