@@ -98,7 +98,7 @@ export async function createTeam(req, res) {
       public_description: teamData.teamname?.trim() || "",
       location: "null",
       members: "null",
-      group_ids: ["Participants"],
+      group_ids: ["8"],
     };
     let createData = {};
 
