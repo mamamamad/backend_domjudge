@@ -118,9 +118,9 @@ export class DomjudgeService {
     } catch (error) {
       if (error.response.status === 400) {
         logger.warn(`Team might already exist: ${teamData.name}`);
-        console.log("hi2")
+        console.log("hi2");
       }
-      console.log("hi")
+      console.log("hi");
     }
   }
 
@@ -179,7 +179,7 @@ export class DomjudgeService {
       formal_name: "Islamic Republic of Iran",
       country: "IRN",
     };
-
+    console.log(orgData);
     try {
       const created = await this.createOrganization(orgData);
       // Update the map with the new organization
