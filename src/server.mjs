@@ -1,52 +1,61 @@
-import express from 'express';
-import cors from 'cors';
-import helmet from 'helmet';
-import swaggerUi from 'swagger-ui-express';
-import { config } from './config/index.mjs';
-import logger from './utils/logger.mjs';
-import teamRoutes from './routes/teamRoutes.mjs';
-import { errorHandler } from './middleware/errorHandler.mjs';
-import { swaggerSpec } from './config/swagger.mjs';
+import express from "express";
+import cors from "cors";
+import helmet from "helmet";
+import swaggerUi from "swagger-ui-express";
+import { config } from "./config/index.mjs";
+import logger from "./utils/logger.mjs";
+import teamRoutes from "./routes/teamRoutes.mjs";
+import { errorHandler } from "./middleware/errorHandler.mjs";
+import { swaggerSpec } from "./config/swagger.mjs";
 
 const app = express();
 
 // Middleware - Configure Helmet to allow Swagger UI
-app.use(helmet({
-  contentSecurityPolicy: false,
-  crossOriginEmbedderPolicy: false,
-}));
+app.use(
+  helmet({
+    contentSecurityPolicy: false,
+    crossOriginEmbedderPolicy: false,
+  })
+);
 
 // CORS configuration - Allow all origins for Swagger UI
-app.use(cors({
-  origin: '*',
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'Accept', 'X-Requested-With'],
-  credentials: false,
-}));
+app.use(
+  cors({
+    origin: "http://api.bircpc.ir",
+    methods: ["GET", "POST", "PUT"],
+    allowedHeaders: [
+      "Content-Type",
+      "Authorization",
+      "Accept",
+      "X-Requested-With",
+    ],
+    credentials: false,
+  })
+);
 
 // Handle preflight requests
-app.options('*', cors());
+app.options("*", cors());
 
-app.use(express.json({ limit: '10mb' }));
-app.use(express.urlencoded({ extended: true, limit: '10mb' }));
+app.use(express.json({ limit: "10mb" }));
+app.use(express.urlencoded({ extended: true, limit: "10mb" }));
 
 // Request logging (skip for Swagger UI assets)
 app.use((req, res, next) => {
   // Skip logging for Swagger UI static files
-  if (req.path.startsWith('/api-docs') && req.path !== '/api-docs.json') {
+  if (req.path.startsWith("/api-docs") && req.path !== "/api-docs.json") {
     return next();
   }
   logger.info(`${req.method} ${req.path}`, {
     ip: req.ip,
-    userAgent: req.get('user-agent'),
+    userAgent: req.get("user-agent"),
   });
   next();
 });
 
 // Swagger JSON endpoint - Must be before Swagger UI setup
-app.get('/api-docs.json', (req, res) => {
-  res.setHeader('Content-Type', 'application/json');
-  res.setHeader('Access-Control-Allow-Origin', '*');
+app.get("/api-docs.json", (req, res) => {
+  res.setHeader("Content-Type", "application/json");
+  res.setHeader("Access-Control-Allow-Origin", "*");
   res.send(swaggerSpec);
 });
 
@@ -71,7 +80,7 @@ const swaggerUiOptions = {
     .swagger-ui .opblock.opblock-post .opblock-summary { border-color: #49cc90; }
     .swagger-ui .opblock.opblock-get .opblock-summary { border-color: #61affe; }
   `,
-  customSiteTitle: 'DOMjudge Automation API - Interactive Documentation',
+  customSiteTitle: "DOMjudge Automation API - Interactive Documentation",
   swaggerOptions: {
     // Enable interactive features
     persistAuthorization: false,
@@ -79,12 +88,20 @@ const swaggerUiOptions = {
     filter: true,
     tryItOutEnabled: true,
     // Enable all HTTP methods for testing
-    supportedSubmitMethods: ['get', 'post', 'put', 'delete', 'patch', 'head', 'options'],
+    supportedSubmitMethods: [
+      "get",
+      "post",
+      "put",
+      "delete",
+      "patch",
+      "head",
+      "options",
+    ],
     // Show models and examples
     defaultModelsExpandDepth: 2,
     defaultModelExpandDepth: 2,
     // Expand operations by default
-    docExpansion: 'list',
+    docExpansion: "list",
     // Enable deep linking
     deepLinking: true,
     // Show operation IDs
@@ -97,22 +114,26 @@ const swaggerUiOptions = {
 };
 
 // Setup Swagger UI - Standard setup that works reliably
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec, swaggerUiOptions));
+app.use(
+  "/api-docs",
+  swaggerUi.serve,
+  swaggerUi.setup(swaggerSpec, swaggerUiOptions)
+);
 
 // Health check endpoint
-app.get('/health', (req, res) => {
+app.get("/health", (req, res) => {
   res.json({
-    status: 'ok',
+    status: "ok",
     timestamp: new Date().toISOString(),
-    service: 'domjudge-automation-api',
-    message: 'Server is running and ready to accept requests',
+    service: "domjudge-automation-api",
+    message: "Server is running and ready to accept requests",
   });
 });
 
 // Test endpoint for Swagger UI testing
-app.get('/api/v1/test', (req, res) => {
+app.get("/api/v1/test", (req, res) => {
   res.json({
-    message: 'API is working! You can send requests from Swagger UI.',
+    message: "API is working! You can send requests from Swagger UI.",
     timestamp: new Date().toISOString(),
     method: req.method,
     path: req.path,
@@ -120,9 +141,9 @@ app.get('/api/v1/test', (req, res) => {
 });
 
 // Test POST endpoint
-app.post('/api/v1/test', (req, res) => {
+app.post("/api/v1/test", (req, res) => {
   res.json({
-    message: 'POST request received successfully!',
+    message: "POST request received successfully!",
     timestamp: new Date().toISOString(),
     body: req.body,
     method: req.method,
@@ -131,12 +152,12 @@ app.post('/api/v1/test', (req, res) => {
 });
 
 // API routes
-app.use('/api/v1', teamRoutes);
+app.use("/api/v1", teamRoutes);
 
 // 404 handler
 app.use((req, res) => {
   res.status(404).json({
-    error: 'Not found',
+    error: "Not found",
     path: req.path,
   });
 });
@@ -153,19 +174,20 @@ app.listen(PORT, () => {
     domjudgeApi: config.domjudge.apiBase,
     contestId: config.domjudge.contestId,
   });
-  logger.info(`Swagger documentation available at http://localhost:${PORT}/api-docs`);
+  logger.info(
+    `Swagger documentation available at http://localhost:${PORT}/api-docs`
+  );
 });
 
 // Graceful shutdown
-process.on('SIGTERM', () => {
-  logger.info('SIGTERM signal received: closing HTTP server');
+process.on("SIGTERM", () => {
+  logger.info("SIGTERM signal received: closing HTTP server");
   process.exit(0);
 });
 
-process.on('SIGINT', () => {
-  logger.info('SIGINT signal received: closing HTTP server');
+process.on("SIGINT", () => {
+  logger.info("SIGINT signal received: closing HTTP server");
   process.exit(0);
 });
 
 export default app;
-
