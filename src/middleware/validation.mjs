@@ -1,8 +1,5 @@
 import { validationResult } from "express-validator";
-import dotenv from "dotenv";
-
-dotenv.config();
-
+import { config } from "../config/index.mjs";
 /**
  * Middleware to validate request using express-validator
  * @param {import('express').Request} req - Express request object
@@ -37,8 +34,8 @@ export function basicAuth(req, res, next) {
   console.log(username, password);
 
   // Check credentials
-  const validUsername = process.env.DOMJUDGE_USERNAME || "admin";
-  const validPassword = process.env.DOMJUDGE_PASSWORD || "";
+  const validUsername = config.domjudge.username;
+  const validPassword = config.domjudge.password;
   console.log(validUsername, validPassword);
   console.log(username, password);
   if (username === validUsername && password === validPassword) {
