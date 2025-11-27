@@ -1,4 +1,7 @@
 import { validationResult } from "express-validator";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 /**
  * Middleware to validate request using express-validator
