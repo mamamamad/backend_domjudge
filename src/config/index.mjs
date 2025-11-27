@@ -4,7 +4,7 @@ dotenv.config();
 
 export const config = {
   domjudge: {
-    apiBase: process.env.DOMJUDGE_API_BASE || "",
+    apiBase: process.env.DOMJUDGE_API_BASE || "api.birjand.ir",
     username: process.env.DOMJUDGE_USERNAME || "admin",
     password: process.env.DOMJUDGE_PASSWORD || "",
     contestId: process.env.DOMJUDGE_CONTEST_ID || "1",
@@ -31,5 +31,6 @@ if (!config.domjudge.password) {
 }
 
 if (!config.domjudge.apiBase) {
+  console.log(config.domjudge.apiBase);
   throw new Error("DOMJUDGE_API_BASE is required");
 }

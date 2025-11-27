@@ -21,7 +21,7 @@ app.use(
 // CORS configuration - Allow all origins for Swagger UI
 app.use(
   cors({
-    origin: "http://api.bircpc.ir",
+    origin: ["https://register.bircpc.ir", "http://register.bircpc.ir"],
     methods: ["GET", "POST", "PUT"],
     allowedHeaders: [
       "Content-Type",
