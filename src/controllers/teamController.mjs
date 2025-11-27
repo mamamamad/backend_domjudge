@@ -9,7 +9,7 @@ import { addDataToJson } from "../utils/addToJson.mjs";
 import logger from "../utils/logger.mjs";
 import { config } from "../config/index.mjs";
 import sendEmail from "../services/emailService.mjs";
-
+import fs from "fs/promises";
 /**
  * Create a single team and user
  * @param {import('express').Request} req - Express request object

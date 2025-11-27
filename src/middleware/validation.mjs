@@ -31,13 +31,11 @@ export function basicAuth(req, res, next) {
     "ascii"
   );
   const [username, password] = credentials.split(":");
-  console.log(username, password);
 
   // Check credentials
   const validUsername = config.domjudge.username;
   const validPassword = config.domjudge.password;
-  console.log(validUsername, validPassword);
-  console.log(username, password);
+
   if (username === validUsername && password === validPassword) {
     // Auth successful
     console.log("Auth successful");
