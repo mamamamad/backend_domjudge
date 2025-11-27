@@ -22,7 +22,7 @@ app.use(
 app.use(
   cors({
     origin: ["https://register.bircpc.ir", "http://register.bircpc.ir"],
-    methods: ["GET", "POST", "PUT"],
+    methods: ["GET", "POST", "PUT", "OPTIONS"],
     allowedHeaders: [
       "Content-Type",
       "Authorization",
