@@ -113,9 +113,7 @@ export async function createTeam(req, res) {
         team_id: `${uniqueId}`,
         roles: ["team"],
       };
-      console.log(userPayload);
       const createdUser = await domjudgeService.createUser(userPayload);
-      console.log(createdUser);
       createData = {
         success: true,
         email: teamData.email,
@@ -124,8 +122,6 @@ export async function createTeam(req, res) {
         username,
         password,
       };
-
-      console.log(createData);
     }
     const sendEmailStatus = await sendEmail(createData);
     console.log(
