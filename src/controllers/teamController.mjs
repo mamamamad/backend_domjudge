@@ -133,10 +133,12 @@ export async function createTeam(req, res) {
       console.log(
         `the ${sendEmailStatus.email} is sended: ${sendEmailStatus.success}`
       );
+      addDataToJson("emailData.json", sendEmailStatus);
     } else {
       console.log(
         `the ${sendEmailStatus.email} is not sended: ${sendEmailStatus.success}`
       );
+      addDataToJson("emailData.json", sendEmailStatus);
     }
     res.status(201).json({
       success: true,
@@ -154,5 +156,50 @@ export async function createTeam(req, res) {
       success: false,
       error: erro.message || "Failed to create team",
     });
+  }
+}
+
+export async function sendEmail(req, res) {
+  try {
+    const statusRaw = await fs.readFile("emailData.json", "utf-8");
+    const statuses = JSON.parse(statusRaw);
+
+    // 2️⃣ Read user data file
+    const userRaw = await fs.readFile("userPass.json", "utf-8");
+    const users = JSON.parse(userRaw);
+
+    for (let i = 0; i < statuses.length; i++) {
+      const status = statuses[i];
+
+      // Only resend for failed emails
+      if (status.success === false) {
+        // Find user data matching the email
+        const userData = users.find((u) => u.email === status.email);
+
+        if (!userData) {
+          console.log(`No user data found for ${status.email}`);
+          continue;
+        }
+
+        // 4️⃣ Send email again
+        try {
+          const result = await sendEmail(userData);
+          if (result.success) {
+            console.log(`Email sent successfully to ${status.email}`);
+            // Update status
+            statuses[i].success = true;
+          } else {
+            console.log(`Failed again to send email to ${status.email}`);
+          }
+        } catch (err) {
+          console.error(`Error sending email to ${status.email}:`, err.message);
+        }
+      }
+
+      await fs.writeFile("emailData.json", JSON.stringify(statuses, null, 2));
+      console.log("Status file updated.");
+    }
+  } catch (e) {
+    console.log(`errro in ${e}`);
   }
 }

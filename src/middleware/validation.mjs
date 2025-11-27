@@ -1,4 +1,4 @@
-import { validationResult } from 'express-validator';
+import { validationResult } from "express-validator";
 
 /**
  * Middleware to validate request using express-validator
@@ -17,3 +17,29 @@ export function validateRequest(req, res, next) {
   next();
 }
 
+export function basicAuth(req, res, next) {
+  const authHeader = req.headers.authorization;
+
+  if (!authHeader || !authHeader.startsWith("Basic ")) {
+    res.setHeader("WWW-Authenticate", 'Basic realm="Restricted Area"');
+    return res.status(401).send("Authentication required.");
+  }
+
+  // Decode base64 credentials
+  const base64Credentials = authHeader.split(" ")[1];
+  const credentials = Buffer.from(base64Credentials, "base64").toString(
+    "ascii"
+  );
+  const [username, password] = credentials.split(":");
+
+  // Check credentials
+  const validUsername = process.env.DOMJUDGE_USERNAME || "admin";
+  const validPassword = process.env.DOMJUDGE_PASSWORD || "";
+  if (username === validUsername && password === validPassword) {
+    // Auth successful
+    return next();
+  } else {
+    res.setHeader("WWW-Authenticate", 'Basic realm="Restricted Area"');
+    return res.status(401).send("Invalid credentials.");
+  }
+}
