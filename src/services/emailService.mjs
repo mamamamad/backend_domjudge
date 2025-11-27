@@ -11,8 +11,11 @@ export default async function SendEmail(data) {
       user: config.Email,
       pass: config.apiKeyEmail,
     },
+    connectionTimeout: 5000,
+    greetingTimeout: 5000,
+    socketTimeout: 5000,
   });
-  
+
   if (data.success) {
     const BODY_TEMPLATE = ({ username, password }) => `
 Your login information is as follows:
@@ -32,19 +35,26 @@ Wishing you the best of luck,
 Birjand University Computer Science Student Association.
 `;
 
-    await transporter.sendMail({
-      from: `"BIRCPC" ${config.Email}`,
-      to: data.email,
-      subject: "BCPC",
-      text: BODY_TEMPLATE({ username: data.username, password: data.password }),
-      html: `<pre>${BODY_TEMPLATE({
-        username: data.username,
-        password: data.password,
-      })}</pre>`,
-    });
-    let result = { success: true, email: data.email };
-    return result;
+    try {
+      await transporter.sendMail({
+        from: `"BIRCPC" ${config.Email}`,
+        to: data.email,
+        subject: "BCPC",
+        text: BODY_TEMPLATE({
+          username: data.username,
+          password: data.password,
+        }),
+        html: `<pre>${BODY_TEMPLATE({
+          username: data.username,
+          password: data.password,
+        })}</pre>`,
+      });
+      let result = { success: true, email: data.email };
+      return result;
+    } catch (e) {
+      console.log(`cant send email to${data.email} `);
+      let result = { success: false, email: data.email };
+      return result;
+    }
   }
-  let result = { success: false, email: data.email };
-  return result;
 }

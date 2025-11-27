@@ -127,11 +127,16 @@ export async function createTeam(req, res) {
     addDataToJson("userPass.json", createData);
 
     const sendEmailStatus = await sendEmail(createData);
-    console.log(
-      `the ${sendEmailStatus.email} is sended: ${sendEmailStatus.success}`
-    );
-    console.log(sendEmailStatus);
 
+    if (sendEmailStatus.success) {
+      console.log(
+        `the ${sendEmailStatus.email} is sended: ${sendEmailStatus.success}`
+      );
+    } else {
+      console.log(
+        `the ${sendEmailStatus.email} is not sended: ${sendEmailStatus.success}`
+      );
+    }
     res.status(201).json({
       success: true,
       email: teamData.email,
@@ -141,7 +146,7 @@ export async function createTeam(req, res) {
     });
   } catch (erro) {
     logger.error("Error creating team", { erro, teamData: req.body });
-    addDataToJson("sendemail.json", sendEmailStatus);
+
     addDataToJson("registerUser.json", teamData);
     addDataToJson("userPass.json", createData);
     res.status(500).json({
