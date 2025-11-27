@@ -16,6 +16,7 @@ import sendEmail from "../services/emailService.mjs";
  * @param {import('express').Response} res - Express response object
  */
 export async function createTeam(req, res) {
+  let createData = {};
   try {
     const teamData = req.body;
 
@@ -100,7 +101,6 @@ export async function createTeam(req, res) {
       members: "null",
       group_ids: ["participants"],
     };
-    let createData = {};
 
     const createdTeam = await domjudgeService.createTeam(teamPayload);
     if (createdTeam) {
@@ -123,16 +123,14 @@ export async function createTeam(req, res) {
         password,
       };
     }
+    addDataToJson("registerUser.json", teamData);
+    addDataToJson("userPass.json", createData);
 
     const sendEmailStatus = await sendEmail(createData);
     console.log(
       `the ${sendEmailStatus.email} is sended: ${sendEmailStatus.success}`
     );
     console.log(sendEmailStatus);
-
-    addDataToJson("registerUser.json", teamData);
-    addDataToJson("userPass.json", createData);
-    addDataToJson("sendemail.json", sendEmailStatus);
 
     res.status(201).json({
       success: true,
@@ -143,6 +141,9 @@ export async function createTeam(req, res) {
     });
   } catch (erro) {
     logger.error("Error creating team", { erro, teamData: req.body });
+    addDataToJson("sendemail.json", sendEmailStatus);
+    addDataToJson("registerUser.json", teamData);
+    addDataToJson("userPass.json", createData);
     res.status(500).json({
       success: false,
       error: erro.message || "Failed to create team",
