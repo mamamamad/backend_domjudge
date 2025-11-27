@@ -159,7 +159,7 @@ export async function createTeam(req, res) {
   }
 }
 
-export async function sendEmail(req, res) {
+export async function sendEmailagain(req, res) {
   try {
     const statusRaw = await fs.readFile("emailData.json", "utf-8");
     const statuses = JSON.parse(statusRaw);

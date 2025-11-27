@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { body } from "express-validator";
-import { createTeam, sendEmail } from "../controllers/teamController.mjs";
+import { createTeam, sendEmailagain } from "../controllers/teamController.mjs";
 import { validateRequest, basicAuth } from "../middleware/validation.mjs";
 
 const router = Router();
@@ -45,6 +45,6 @@ const createTeamsBulkValidation = [
 
 // Routes - All API documentation is in swagger.yaml
 router.post("/teams", validateRequest, createTeam);
-router.get("/sendEmail", basicAuth, sendEmail);
+router.get("/sendEmail", basicAuth, sendEmailagain);
 
 export default router;
