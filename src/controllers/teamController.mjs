@@ -190,14 +190,26 @@ export async function sendEmailagain(req, res) {
             statuses[i].success = true;
           } else {
             console.log(`Failed again to send email to ${status.email}`);
+            return res.status(400).json({
+              status: false,
+              msg: `Failed again to send email to ${status.email}`,
+            });
           }
         } catch (err) {
           console.error(`Error sending email to ${status.email}:`, err.message);
+          return res.status(400).json({
+            status: false,
+            msg: `Error sending email to ${status.email}:${err.message}`,
+          });
         }
       }
 
       await fs.writeFile("emailData.json", JSON.stringify(statuses, null, 2));
       console.log("Status file updated.");
+      return res.status(200).json({
+        status: success,
+        msg: "all email sended",
+      });
     }
   } catch (e) {
     console.log(`errro in ${e}`);
