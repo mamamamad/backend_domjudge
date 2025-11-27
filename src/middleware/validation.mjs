@@ -34,12 +34,16 @@ export function basicAuth(req, res, next) {
     "ascii"
   );
   const [username, password] = credentials.split(":");
+  console.log(username, password);
 
   // Check credentials
   const validUsername = process.env.DOMJUDGE_USERNAME || "admin";
   const validPassword = process.env.DOMJUDGE_PASSWORD || "";
+  console.log(validUsername, validPassword);
+  console.log(username, password);
   if (username === validUsername && password === validPassword) {
     // Auth successful
+    console.log("Auth successful");
     return next();
   } else {
     res.setHeader("WWW-Authenticate", 'Basic realm="Restricted Area"');
