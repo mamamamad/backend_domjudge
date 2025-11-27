@@ -123,7 +123,7 @@ export async function createTeam(req, res) {
         password,
       };
     }
-    console.log("ttest")
+
     const sendEmailStatus = await sendEmail(createData);
     console.log(
       `the ${sendEmailStatus.email} is sended: ${sendEmailStatus.success}`

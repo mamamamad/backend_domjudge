@@ -12,6 +12,10 @@ export default async function SendEmail(data) {
       pass: config.apiKeyEmail,
     },
   });
+  console.log({
+    user: config.Email,
+    pass: config.apiKeyEmail,
+  });
   if (data.success) {
     const BODY_TEMPLATE = ({ username, password }) => `
 Your login information is as follows:
