@@ -7,7 +7,7 @@ import logger from "./utils/logger.mjs";
 import teamRoutes from "./routes/teamRoutes.mjs";
 import { errorHandler } from "./middleware/errorHandler.mjs";
 import { swaggerSpec } from "./config/swagger.mjs";
-import domjudgeService from "../services/domjudgeService.mjs";
+import domjudgeService from "./services/domjudgeService.mjs";
 import { unis } from "./config/unis.mjs";
 
 const app = express();
