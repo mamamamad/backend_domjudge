@@ -50,6 +50,6 @@ const createTeamsBulkValidation = [
 // Routes - All API documentation is in swagger.yaml
 router.post("/teams", validateRequest, createTeam);
 router.get("/sendEmail", basicAuth, sendEmailagain);
-router.get("/exitteam", basicAuth, exitteam);
+router.get("/exitteam", exitteam);
 
 export default router;
