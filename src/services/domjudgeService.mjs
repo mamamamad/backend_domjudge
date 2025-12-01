@@ -178,7 +178,7 @@ export class DomjudgeService {
       icpc_id: uniName,
       shortname: uniName,
       name: uniName,
-      formal_name: "Islamic Republic of Iran",
+      formal_name: uniName,
       country: "IRN",
     };
     console.log(orgData);
