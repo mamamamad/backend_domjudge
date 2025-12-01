@@ -7,10 +7,7 @@ import logger from "./utils/logger.mjs";
 import teamRoutes from "./routes/teamRoutes.mjs";
 import { errorHandler } from "./middleware/errorHandler.mjs";
 import { swaggerSpec } from "./config/swagger.mjs";
-import {
-  createOrGetOrganization,
-  getOrganizations,
-} from "./services/domjudgeService.mjs";
+import domjudgeService from "../services/domjudgeService.mjs";
 import { unis } from "./config/unis.mjs";
 
 const app = express();
@@ -65,9 +62,9 @@ app.get("/api-docs.json", (req, res) => {
 });
 
 // create all uni in iran.
-const existOrgan = await getOrganizations();
+const existOrgan = await domjudgeService.getOrganizations();
 for (const item of unis) {
-  await createOrGetOrganization(item, existOrgan);
+  await domjudgeService.createOrGetOrganization(item, existOrgan);
   console.log(`the ${item} is created.`);
 }
 
