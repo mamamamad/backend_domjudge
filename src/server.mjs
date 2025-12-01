@@ -64,7 +64,8 @@ app.get("/api-docs.json", (req, res) => {
 // create all uni in iran.
 const existOrgan = await domjudgeService.getOrganizations();
 for (const item of unis) {
-  await domjudgeService.createOrGetOrganization(item, existOrgan);
+  const id = await domjudgeService.createOrGetOrganization(item, existOrgan);
+  console.log(id);
   console.log(`the ${item} is created.`);
 }
 
