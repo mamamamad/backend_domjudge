@@ -174,7 +174,8 @@ export class DomjudgeService {
     }
 
     const orgData = {
-      shortname: "IR",
+      icpc_id: uniName,
+      shortname: uniName,
       name: uniName,
       formal_name: "Islamic Republic of Iran",
       country: "IRN",
