@@ -215,3 +215,25 @@ export async function sendEmailagain(req, res) {
     console.log(`errro in ${e}`);
   }
 }
+export async function exitteam(req, res) {
+  try {
+    const teamName = req.query.name;
+    const existingTeams = await domjudgeService.getTeams();
+    // Check if team already exists
+    if (existingTeams.has(teamName)) {
+      return res.status(409).json({
+        success: false,
+        error: `Team '${teamName}' already exists`,
+      });
+    }
+    return res.status(200).json({
+      success: true,
+      error: `Team '${teamName}' not exists`,
+    });
+  } catch (e) {
+    console.log(e);
+    return res.status(500).json({
+      success: "errrrorrrr",
+    });
+  }
+}
