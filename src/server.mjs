@@ -7,6 +7,11 @@ import logger from "./utils/logger.mjs";
 import teamRoutes from "./routes/teamRoutes.mjs";
 import { errorHandler } from "./middleware/errorHandler.mjs";
 import { swaggerSpec } from "./config/swagger.mjs";
+import {
+  createOrGetOrganization,
+  getOrganizations,
+} from "./services/domjudgeService.mjs";
+import { unis } from "./config/unis.mjs";
 
 const app = express();
 
@@ -58,6 +63,13 @@ app.get("/api-docs.json", (req, res) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.send(swaggerSpec);
 });
+
+// create all uni in iran.
+const existOrgan = await getOrganizations();
+for (const item of unis) {
+  await createOrGetOrganization(item, existOrgan);
+  console.log(`the ${item} is created.`);
+}
 
 // Swagger documentation UI - Fully interactive configuration
 const swaggerUiOptions = {

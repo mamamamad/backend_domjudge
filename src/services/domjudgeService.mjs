@@ -179,7 +179,7 @@ export class DomjudgeService {
       formal_name: "Islamic Republic of Iran",
       country: "IRN",
     };
-    console.log(orgData);
+    
     try {
       const created = await this.createOrganization(orgData);
       // Update the map with the new organization
