@@ -174,6 +174,7 @@ export class DomjudgeService {
     }
 
     const orgData = {
+      id: uniName,
       icpc_id: uniName,
       shortname: uniName,
       name: uniName,
