@@ -54,7 +54,7 @@ export async function createTeam(req, res) {
       teamData.organization_id,
       existingOrgs
     );
-    console.log(`the ${item} is created.`);
+    console.log(`the ${teamData.organization_id} is created.`);
 
     // Check if team already exists
     if (existingTeams.has(teamData.teamname)) {
