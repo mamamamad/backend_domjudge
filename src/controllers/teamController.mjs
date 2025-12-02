@@ -50,6 +50,12 @@ export async function createTeam(req, res) {
       domjudgeService.getUsers(),
     ]);
 
+    const id = await domjudgeService.createOrGetOrganization(
+      teamData.organization_id,
+      existingOrgs
+    );
+    console.log(`the ${item} is created.`);
+
     // Check if team already exists
     if (existingTeams.has(teamData.teamname)) {
       res.status(409).json({

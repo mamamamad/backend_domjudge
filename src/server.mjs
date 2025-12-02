@@ -61,14 +61,6 @@ app.get("/api-docs.json", (req, res) => {
   res.send(swaggerSpec);
 });
 
-// create all uni in iran.
-const existOrgan = await domjudgeService.getOrganizations();
-for (const item of unis) {
-  const id = await domjudgeService.createOrGetOrganization(item, existOrgan);
-  console.log(id);
-  console.log(`the ${item} is created.`);
-}
-
 // Swagger documentation UI - Fully interactive configuration
 const swaggerUiOptions = {
   customCss: `
